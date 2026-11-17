@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>A PRANEETH | Portfolio</title>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #020204;
+}
+
+
+body {
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+#intro {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #020204;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+#canvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* =========================================================
+   CINEMATIC NAME
+========================================================= */
+
+.cinematic-name {
+
+    position: absolute;
+
+    z-index: 32;
+
+    left: 3vw;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    white-space: nowrap;
+
+    /*
+       Heavy classic serif.
+    */
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size:
+        clamp(
+            55px,
+            8vw,
+            150px
+        );
+
+    font-weight: 900;
+
+    line-height: .78;
+
+    /*
+       Tight metal-title spacing.
+    */
+
+    letter-spacing:
+        clamp(
+            -7px,
+            -.35vw,
+            -2px
+        );
+
+    /*
+       Important:
+       Nothing behind the text.
+    */
+
+    background: transparent;
+
+    pointer-events: none;
+
+    perspective: 1200px;
+
+}
+
+
+/* =========================================================
+   ACTUAL SILVER METAL TEXT
+========================================================= */
+
+.cinematic-name span {
+
+    position: relative;
+
+    display: inline-block;
+
+    opacity: 0;
+
+    transform:
+        translateY(40px)
+        scale(.86);
+
+    transform-origin:
+        center bottom;
+
+
+    /*
+       VERY IMPORTANT FOR CHROME
+       Forces Chrome to use the
+       background as the text fill.
+    */
+
+    color: transparent;
+
+    -webkit-text-fill-color: transparent;
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+
+    /*
+       REAL METAL.
+
+       Notice the large DARK sections.
+       This is what makes it look like
+       SILVER METAL instead of WHITE.
+    */
+
+    background-image:
+
+        /* Fine metal scratches */
+
+        repeating-linear-gradient(
+            103deg,
+
+            rgba(255,255,255,.22) 0px,
+            rgba(255,255,255,.22) 1px,
+
+            transparent 2px,
+            transparent 5px,
+
+            rgba(0,0,0,.30) 6px,
+
+            rgba(0,0,0,.30) 7px,
+
+            transparent 8px,
+            transparent 12px
+        ),
+
+        /* Main metal body */
+
+        linear-gradient(
+            180deg,
+
+            #c8c9cb 0%,
+
+            #77797c 7%,
+
+            #303236 16%,
+
+            #111214 23%,
+
+            #626468 31%,
+
+            #c4c6c8 39%,
+
+            #e0e1e2 45%,
+
+            #85878a 51%,
+
+            #292b2e 59%,
+
+            #0f1012 66%,
+
+            #5e6063 73%,
+
+            #bfc1c3 80%,
+
+            #737579 87%,
+
+            #25272a 94%,
+
+            #aeb0b3 100%
+        );
+
+
+    background-blend-mode:
+        overlay,
+        normal;
+
+
+    /*
+       THIN STEEL OUTLINE
+    */
+
+    -webkit-text-stroke:
+        1px
+        rgba(180,182,185,.9);
+
+
+    /*
+       Dark 3D extrusion.
+
+       NO white glow.
+    */
+
+    text-shadow:
+
+        /* tiny upper steel edge */
+
+        0 -1px 0
+        #d9dadc,
+
+        /* dark bevel */
+
+        1px 1px 0
+        #55575a,
+
+        2px 2px 0
+        #292a2d,
+
+        3px 3px 0
+        #17181a,
+
+        4px 4px 0
+        #0b0c0e,
+
+        5px 5px 0
+        #050506,
+
+        /* depth */
+
+        7px 8px 12px
+        rgba(0,0,0,.95);
+
+
+    filter:
+        contrast(1.18);
+}
+
+
+/* =========================================================
+   SCRATCHED STEEL OVERLAY
+========================================================= */
+
+.cinematic-name span::after {
+
+    content: attr(data-letter);
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    color: transparent;
+
+    -webkit-text-fill-color: transparent;
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+
+    /*
+       SUBTLE worn-metal texture.
+
+       Dark scratches + silver abrasions.
+    */
+
+    background-image:
+
+        repeating-linear-gradient(
+            108deg,
+
+            transparent 0px,
+            transparent 4px,
+
+            rgba(0,0,0,.38) 5px,
+
+            rgba(0,0,0,.38) 6px,
+
+            transparent 7px,
+
+            transparent 13px
+        ),
+
+        repeating-linear-gradient(
+            87deg,
+
+            transparent 0px,
+            transparent 11px,
+
+            rgba(255,255,255,.28) 12px,
+
+            transparent 13px,
+
+            transparent 21px
+        );
+
+
+    background-blend-mode:
+        multiply,
+        screen;
+
+
+    opacity: .7;
+}
+
+
+/* =========================================================
+   LETTER REVEAL
+========================================================= */
+
+.cinematic-name span.reveal {
+
+    animation:
+
+        nameLetterIn
+        .8s
+        cubic-bezier(
+            .16,
+            1,
+            .3,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes nameLetterIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(42px)
+            scale(.86);
+
+        filter:
+            blur(2px)
+            brightness(.45);
+    }
+
+
+    45% {
+
+        opacity: 1;
+
+        filter:
+            blur(0)
+            brightness(1.25);
+    }
+
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:
+            blur(0)
+            brightness(1);
+    }
+
+}
+
+
+/* =========================================================
+   SPACE BETWEEN A AND PRANEETH
+========================================================= */
+
+.cinematic-name .name-space {
+
+    width:
+        clamp(
+            18px,
+            1.8vw,
+            38px
+        );
+
+    opacity: 1;
+
+    transform: none;
+
+    background: none;
+
+    -webkit-text-stroke: 0;
+
+    text-shadow: none;
+}
+
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.vignette {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+
+            transparent 32%,
+
+            rgba(0,0,0,.25) 60%,
+
+            rgba(0,0,0,.75) 100%
+        );
+}
+
+
+/* =========================================================
+   FILM GRAIN
+========================================================= */
+
+.grain {
+
+    position: absolute;
+
+    inset: -50%;
+
+    z-index: 30;
+
+    pointer-events: none;
+
+    opacity: .075;
+
+    background-image:
+
+        url(
+            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.8'/%3E%3C/svg%3E"
+        );
+
+    animation:
+        grain .15s steps(2) infinite;
+}
+
+
+@keyframes grain {
+
+    0% {
+        transform: translate(0,0);
+    }
+
+    25% {
+        transform: translate(2%,-1%);
+    }
+
+    50% {
+        transform: translate(-1%,2%);
+    }
+
+    75% {
+        transform: translate(2%,1%);
+    }
+
+    100% {
+        transform: translate(-2%,-2%);
+    }
+}
+
+
+/* =========================================================
+   LETTERBOX
+========================================================= */
+
+.bar {
+
+    display: none;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description {
+
+    position: absolute;
+
+    z-index: 35;
+
+    left: 5vw;
+
+    bottom: 12vh;
+
+    width:
+        min(
+            470px,
+            42vw
+        );
+
+    opacity: 0;
+
+    transform:
+        translateY(30px)
+        scale(.98);
+
+    pointer-events: none;
+}
+
+
+.description.show {
+
+    animation:
+
+        descriptionIn
+        1.2s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes descriptionIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.98);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   DESCRIPTION LABEL
+========================================================= */
+
+.description-label {
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .65
+        );
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   DESCRIPTION TEXT
+========================================================= */
+
+.description-text {
+
+    font-size:
+
+        clamp(
+            13px,
+            1.15vw,
+            17px
+        );
+
+    line-height: 1.6;
+
+    color:
+
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    text-shadow:
+
+        0 2px 20px
+        rgba(0,0,0,.9);
+}
+
+
+/* =========================================================
+   DESCRIPTION LINE
+========================================================= */
+
+.description-line {
+
+    width: 0;
+
+    height: 1px;
+
+    margin-top: 18px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .8
+        );
+}
+
+
+.description.show
+.description-line {
+
+    animation:
+
+        lineReveal
+        1s
+        ease
+        .35s
+        forwards;
+}
+
+
+@keyframes lineReveal {
+
+    to {
+
+        width: 90px;
+    }
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.scroll {
+
+    position: absolute;
+
+    right: 5vw;
+
+    bottom: 12vh;
+
+    z-index: 35;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color:
+
+        rgba(
+            255,
+            255,
+            255,
+            .45
+        );
+
+    opacity: 0;
+}
+
+
+.scroll.show {
+
+    animation:
+
+        fadeIn
+        1s
+        ease
+        forwards;
+}
+
+
+@keyframes fadeIn {
+
+    to {
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   REPLAY
+========================================================= */
+
+.replay {
+
+    position: absolute;
+
+    top: 10vh;
+
+    right: 5vw;
+
+    z-index: 50;
+
+    padding:
+        10px 16px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .25
+        );
+
+    border-radius: 50px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .25
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    color: white;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        .35s ease;
+}
+
+
+.replay.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.replay:hover {
+
+    background: white;
+
+    color: black;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width: 800px) {
+
+    .description {
+
+        left: 7vw;
+
+        bottom: 14vh;
+
+        width: 70vw;
+    }
+
+
+    .scroll {
+
+        display: none;
+    }
+
+
+    .cinematic-name {
+
+        left: 4vw;
+
+        font-size:
+
+            clamp(
+                36px,
+                9vw,
+                80px
+            );
+
+        letter-spacing:
+            -3px;
+    }
+
+
+    .cinematic-name .name-space {
+
+        width: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    .grain {
+
+        animation: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<section id="intro">
+
+
+<!-- =====================================================
+     CANVAS
+====================================================== -->
+
+<canvas id="canvas"></canvas>
+
+
+<!-- =====================================================
+     CINEMATIC NAME
+====================================================== -->
+
+<div
+    class="cinematic-name"
+    id="cinematicName"
+    aria-label="A PRANEETH"
+>
+
+    <span data-letter="A">
+        A
+    </span>
+
+    <span class="name-space">
+        &nbsp;
+    </span>
+
+    <span data-letter="P">
+        P
+    </span>
+
+    <span data-letter="R">
+        R
+    </span>
+
+    <span data-letter="A">
+        A
+    </span>
+
+    <span data-letter="N">
+        N
+    </span>
+
+    <span data-letter="E">
+        E
+    </span>
+
+    <span data-letter="E">
+        E
+    </span>
+
+    <span data-letter="T">
+        T
+    </span>
+
+    <span data-letter="H">
+        H
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     DESCRIPTION
+====================================================== -->
+
+<div
+    class="description"
+    id="description"
+>
+
+    <div class="description-label">
+
+        DESIGNER · CREATOR · VISUAL STORYTELLER
+
+    </div>
+
+
+    <div class="description-text">
+
+        I turn ideas into visual experiences through
+        design, motion, storytelling and technology.
+
+    </div>
+
+
+    <div class="description-line"></div>
+
+</div>
+
+
+<!-- =====================================================
+     SCROLL
+====================================================== -->
+
+<div
+    class="scroll"
+    id="scroll"
+>
+
+    SCROLL TO EXPLORE
+
+</div>
+
+
+<!-- =====================================================
+     REPLAY
+====================================================== -->
+
+<button
+    class="replay"
+    id="replay"
+    type="button"
+>
+
+    REPLAY INTRO
+
+</button>
+
+
+<!-- =====================================================
+     CINEMATIC EFFECTS
+====================================================== -->
+
+<div class="vignette"></div>
+
+<div class="grain"></div>
+
+<div class="bar top"></div>
+
+<div class="bar bottom"></div>
+
+
+</section>
+
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const canvas =
+    document.getElementById(
+        "canvas"
+    );
+
+
+const ctx =
+    canvas.getContext(
+        "2d",
+        {
+            alpha: false
+        }
+    );
+
+
+const description =
+    document.getElementById(
+        "description"
+    );
+
+
+const scrollText =
+    document.getElementById(
+        "scroll"
+    );
+
+
+const replay =
+    document.getElementById(
+        "replay"
+    );
+
+
+const cinematicName =
+    document.getElementById(
+        "cinematicName"
+    );
+
+
+const nameLetters =
+    cinematicName.querySelectorAll(
+        "span"
+    );
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+const sketchImage =
+    new Image();
+
+
+const colorImage =
+    new Image();
+
+
+sketchImage.src =
+    "image1-sketch.png";
+
+
+colorImage.src =
+    "image2-color.png";
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let width = 0;
+
+let height = 0;
+
+let pixelRatio = 1;
+
+let animationFrame = 0;
+
+let startTime = 0;
+
+let phase = "loading";
+
+let fit = null;
+
+let sketchParticles = [];
+
+let graphiteParticles = [];
+
+let paintBlobs = [];
+
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+function clamp(
+    value,
+    min,
+    max
+) {
+
+    return Math.max(
+
+        min,
+
+        Math.min(
+            max,
+            value
+        )
+    );
+}
+
+
+function easeOutCubic(t) {
+
+    return 1 -
+
+        Math.pow(
+            1 - t,
+            3
+        );
+}
+
+
+function easeInOut(t) {
+
+    return t < .5
+
+        ? 2 * t * t
+
+        : 1 -
+
+          Math.pow(
+              -2 * t + 2,
+              2
+          ) / 2;
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+function resizeCanvas() {
+
+    pixelRatio =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
+
+
+    width =
+        window.innerWidth;
+
+
+    height =
+        window.innerHeight;
+
+
+    canvas.width =
+        width * pixelRatio;
+
+
+    canvas.height =
+        height * pixelRatio;
+
+
+    canvas.style.width =
+        width + "px";
+
+
+    canvas.style.height =
+        height + "px";
+
+
+    ctx.setTransform(
+
+        pixelRatio,
+        0,
+        0,
+        pixelRatio,
+        0,
+        0
+    );
+
+
+    const imageWidth =
+        sketchImage.naturalWidth;
+
+
+    const imageHeight =
+        sketchImage.naturalHeight;
+
+
+    /*
+       Full browser width.
+
+       This preserves the original
+       aspect ratio.
+    */
+
+    const scale =
+        width / imageWidth;
+
+
+    const renderedWidth =
+        imageWidth * scale;
+
+
+    const renderedHeight =
+        imageHeight * scale;
+
+
+    fit = {
+
+        scale: scale,
+
+        x:
+            (
+                width -
+                renderedWidth
+            ) / 2,
+
+        y:
+            (
+                height -
+                renderedHeight
+            ) / 2,
+
+        width:
+            renderedWidth,
+
+        height:
+            renderedHeight
+    };
+}
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =========================================================
+   DRAW IMAGE
+========================================================= */
+
+function drawImage(
+    image,
+    opacity = 1
+) {
+
+    if (!fit) return;
+
+
+    ctx.save();
+
+
+    ctx.globalAlpha =
+        opacity;
+
+
+    ctx.drawImage(
+
+        image,
+
+        fit.x,
+        fit.y,
+
+        fit.width,
+        fit.height
+    );
+
+
+    ctx.restore();
+}
+
+
+/* =========================================================
+   CREATE SKETCH STROKES
+========================================================= */
+
+function createSketchStrokes() {
+
+    const analysisCanvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    const maxWidth =
+        650;
+
+
+    const scale =
+        Math.min(
+
+            1,
+
+            maxWidth /
+            sketchImage.naturalWidth
+        );
+
+
+    analysisCanvas.width =
+        Math.floor(
+
+            sketchImage.naturalWidth *
+            scale
+        );
+
+
+    analysisCanvas.height =
+        Math.floor(
+
+            sketchImage.naturalHeight *
+            scale
+        );
+
+
+    const analysisContext =
+        analysisCanvas.getContext(
+            "2d"
+        );
+
+
+    analysisContext.drawImage(
+
+        sketchImage,
+
+        0,
+        0,
+
+        analysisCanvas.width,
+        analysisCanvas.height
+    );
+
+
+    const imageData =
+        analysisContext.getImageData(
+
+            0,
+            0,
+
+            analysisCanvas.width,
+            analysisCanvas.height
+        );
+
+
+    const data =
+        imageData.data;
+
+
+    const points = [];
+
+
+    for (
+        let y = 2;
+
+        y <
+        analysisCanvas.height - 2;
+
+        y += 2
+    ) {
+
+        for (
+            let x = 2;
+
+            x <
+            analysisCanvas.width - 2;
+
+            x += 2
+        ) {
+
+            const index =
+
+                (
+                    y *
+                    analysisCanvas.width +
+                    x
+                ) * 4;
+
+
+            const red =
+                data[index];
+
+
+            const green =
+                data[index + 1];
+
+
+            const blue =
+                data[index + 2];
+
+
+            const brightness =
+
+                (
+                    red +
+                    green +
+                    blue
+                ) / 3;
+
+
+            if (
+                brightness < 205
+            ) {
+
+                const strength =
+
+                    clamp(
+
+                        (
+                            220 -
+                            brightness
+                        ) / 170,
+
+                        .1,
+                        1
+                    );
+
+
+                points.push({
+
+                    x:
+                        x /
+                        analysisCanvas.width,
+
+                    y:
+                        y /
+                        analysisCanvas.height,
+
+                    strength:
+                        strength
+                });
+            }
+        }
+    }
+
+
+    points.sort(
+
+        (a,b) => {
+
+            const aa =
+                a.y +
+                a.x * .13;
+
+
+            const bb =
+                b.y +
+                b.x * .13;
+
+
+            return aa - bb;
+        }
+    );
+
+
+    const maximum =
+        11000;
+
+
+    const step =
+
+        Math.max(
+
+            1,
+
+            Math.floor(
+
+                points.length /
+                maximum
+            )
+        );
+
+
+    sketchParticles = [];
+
+
+    for (
+        let i = 0;
+
+        i < points.length;
+
+        i += step
+    ) {
+
+        const p =
+            points[i];
+
+
+        const next =
+
+            points[
+
+                Math.min(
+
+                    i + 2,
+
+                    points.length - 1
+                )
+
+            ] || p;
+
+
+        const angle =
+
+            Math.atan2(
+
+                (
+                    next.y -
+                    p.y
+                ) * height,
+
+                (
+                    next.x -
+                    p.x
+                ) * width
+            );
+
+
+        sketchParticles.push({
+
+            x:
+                p.x,
+
+            y:
+                p.y,
+
+            angle:
+                angle,
+
+            length:
+
+                2 +
+                Math.random() * 5,
+
+            strength:
+                p.strength,
+
+            order:
+
+                i /
+                Math.max(
+
+                    1,
+
+                    points.length - 1
+                )
+        });
+    }
+}
+
+
+/* =========================================================
+   GRAPHITE PARTICLES
+========================================================= */
+
+function createGraphiteParticles() {
+
+    graphiteParticles = [];
+
+
+    for (
+        let i = 0;
+
+        i < 2800;
+
+        i++
+    ) {
+
+        graphiteParticles.push({
+
+            x:
+                Math.random(),
+
+            y:
+                Math.random(),
+
+            velocityX:
+
+                (
+                    Math.random() -
+                    .5
+                ) * 1.5,
+
+            velocityY:
+
+                (
+                    Math.random() -
+                    .5
+                ) * 1.5,
+
+            size:
+
+                .4 +
+                Math.random() * 2,
+
+            opacity:
+
+                .15 +
+                Math.random() * .7,
+
+            delay:
+
+                Math.random()
+        });
+    }
+}
+
+
+/* =========================================================
+   PAINT BLOBS
+========================================================= */
+
+function createPaintBlobs() {
+
+    paintBlobs = [];
+
+
+    for (
+        let i = 0;
+
+        i < 150;
+
+        i++
+    ) {
+
+        paintBlobs.push({
+
+            x:
+                Math.random(),
+
+            y:
+                Math.random(),
+
+            radius:
+
+                .015 +
+                Math.random() * .11,
+
+            rotation:
+
+                Math.random() *
+                Math.PI *
+                2,
+
+            stretch:
+
+                .35 +
+                Math.random() * 1.4,
+
+            delay:
+
+                Math.random() * .7
+        });
+    }
+}
+
+
+/* =========================================================
+   CLEAR CANVAS
+========================================================= */
+
+function clearCanvas() {
+
+    if (
+        phase === "sketch"
+    ) {
+
+        ctx.fillStyle =
+            "#ffffff";
+
+    } else {
+
+        ctx.fillStyle =
+            "#020204";
+    }
+
+
+    ctx.fillRect(
+
+        0,
+        0,
+
+        width,
+        height
+    );
+}
+
+
+/* =========================================================
+   DRAW PENCIL
+========================================================= */
+
+function drawPencil(
+    progress
+) {
+
+    clearCanvas();
+
+
+    /*
+       Very faint original image
+       underneath the pencil strokes.
+    */
+
+    drawImage(
+
+        sketchImage,
+
+        .035
+    );
+
+
+    const visibleCount =
+
+        Math.floor(
+
+            sketchParticles.length *
+            progress
+        );
+
+
+    ctx.lineCap =
+        "round";
+
+
+    for (
+        let i = 0;
+
+        i < visibleCount;
+
+        i++
+    ) {
+
+        const stroke =
+            sketchParticles[i];
+
+
+        const x =
+
+            fit.x +
+            stroke.x *
+            fit.width;
+
+
+        const y =
+
+            fit.y +
+            stroke.y *
+            fit.height;
+
+
+        const dx =
+
+            Math.cos(
+                stroke.angle
+            ) *
+            stroke.length;
+
+
+        const dy =
+
+            Math.sin(
+                stroke.angle
+            ) *
+            stroke.length;
+
+
+        ctx.strokeStyle =
+
+            `rgba(
+                35,
+                35,
+                35,
+                ${.25 +
+                  stroke.strength * .7}
+            )`;
+
+
+        ctx.lineWidth =
+
+            .5 +
+            stroke.strength *
+            1.1;
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+
+            x - dx,
+            y - dy
+        );
+
+
+        ctx.lineTo(
+
+            x + dx,
+            y + dy
+        );
+
+
+        ctx.stroke();
+
+
+        if (
+            i % 3 === 0
+        ) {
+
+            ctx.strokeStyle =
+
+                `rgba(
+                    110,
+                    110,
+                    110,
+                    ${.1 +
+                      stroke.strength * .2}
+                )`;
+
+
+            ctx.lineWidth =
+                .35;
+
+
+            ctx.beginPath();
+
+
+            ctx.moveTo(
+
+                x -
+                dx * .65 +
+                1,
+
+                y -
+                dy * .65 -
+                1
+            );
+
+
+            ctx.lineTo(
+
+                x +
+                dx * .65 +
+                1,
+
+                y +
+                dy * .65 -
+                1
+            );
+
+
+            ctx.stroke();
+        }
+    }
+
+
+    drawPencilDust(
+        progress
+    );
+}
+
+
+/* =========================================================
+   PENCIL DUST
+========================================================= */
+
+function drawPencilDust(
+    progress
+) {
+
+    for (
+        const particle
+        of graphiteParticles
+    ) {
+
+        if (
+            particle.delay >
+            progress
+        ) {
+
+            continue;
+        }
+
+
+        const x =
+
+            particle.x *
+            width;
+
+
+        const y =
+
+            particle.y *
+            height;
+
+
+        ctx.fillStyle =
+
+            `rgba(
+                30,
+                30,
+                30,
+                ${particle.opacity * .18}
+            )`;
+
+
+        ctx.fillRect(
+
+            x,
+            y,
+
+            particle.size,
+            particle.size
+        );
+    }
+}
+
+
+/* =========================================================
+   SIMPLE COLOR TRANSITION
+========================================================= */
+
+function drawTransformation(
+    progress
+) {
+
+    clearCanvas();
+
+
+    /*
+       Completed sketch stays visible.
+    */
+
+    drawImage(
+
+        sketchImage,
+
+        1
+    );
+
+
+    /*
+       Color photograph simply fades
+       over the sketch.
+
+       No special effects.
+    */
+
+    const colorOpacity =
+
+        easeInOut(
+
+            clamp(
+                progress,
+                0,
+                1
+            )
+        );
+
+
+    drawImage(
+
+        colorImage,
+
+        colorOpacity
+    );
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+function drawFinal() {
+
+    clearCanvas();
+
+
+    drawImage(
+
+        colorImage,
+
+        1
+    );
+}
+
+
+/* =========================================================
+   NAME RESET
+========================================================= */
+
+function resetName() {
+
+    nameLetters.forEach(
+
+        letter => {
+
+            if (
+                letter.classList.contains(
+                    "name-space"
+                )
+            ) {
+
+                return;
+            }
+
+
+            letter.classList.remove(
+                "reveal"
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   NAME ANIMATION
+========================================================= */
+
+function animateName() {
+
+    resetName();
+
+
+    const actualLetters =
+
+        Array.from(
+            nameLetters
+        ).filter(
+
+            letter =>
+
+                !letter.classList.contains(
+                    "name-space"
+                )
+        );
+
+
+    actualLetters.forEach(
+
+        (letter, index) => {
+
+            setTimeout(
+
+                () => {
+
+                    letter.classList.add(
+                        "reveal"
+                    );
+
+                },
+
+                index * 120
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   MAIN ANIMATION
+========================================================= */
+
+function animate(
+    currentTime
+) {
+
+    const elapsed =
+
+        currentTime -
+        startTime;
+
+
+    /* =====================================================
+       PHASE 1
+       PENCIL DRAWING
+    ====================================================== */
+
+    if (
+        phase === "sketch"
+    ) {
+
+        const progress =
+
+            clamp(
+
+                elapsed / 5600,
+
+                0,
+                1
+            );
+
+
+        drawPencil(
+
+            easeOutCubic(
+                progress
+            )
+        );
+
+
+        /*
+           Hold finished pencil
+           before the color fade.
+        */
+
+        if (
+            elapsed >= 6600
+        ) {
+
+            /*
+               Start the name only
+               after the sketch is complete.
+            */
+
+            animateName();
+
+
+            phase =
+                "transform";
+
+
+            startTime =
+                currentTime;
+        }
+    }
+
+
+    /* =====================================================
+       PHASE 2
+       COLOR FADE
+    ====================================================== */
+
+    else if (
+        phase === "transform"
+    ) {
+
+        const progress =
+
+            clamp(
+
+                elapsed / 3000,
+
+                0,
+                1
+            );
+
+
+        drawTransformation(
+            progress
+        );
+
+
+        if (
+            elapsed >= 3200
+        ) {
+
+            phase =
+                "final";
+
+
+            drawFinal();
+
+
+            /*
+               Description comes after
+               the photograph settles.
+            */
+
+            description
+                .classList
+                .add("show");
+
+
+            scrollText
+                .classList
+                .add("show");
+
+
+            replay
+                .classList
+                .add("show");
+        }
+    }
+
+
+    /* =====================================================
+       PHASE 3
+       FINAL
+    ====================================================== */
+
+    else if (
+        phase === "final"
+    ) {
+
+        drawFinal();
+    }
+
+
+    animationFrame =
+
+        requestAnimationFrame(
+            animate
+        );
+}
+
+
+/* =========================================================
+   START INTRO
+========================================================= */
+
+function startIntro() {
+
+    cancelAnimationFrame(
+        animationFrame
+    );
+
+
+    description
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    scrollText
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    replay
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    resetName();
+
+
+    phase =
+        "sketch";
+
+
+    startTime =
+        0;
+
+
+    requestAnimationFrame(
+
+        function(time) {
+
+            startTime =
+                time;
+
+
+            animate(time);
+        }
+    );
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initialize() {
+
+    resizeCanvas();
+
+
+    createSketchStrokes();
+
+
+    createGraphiteParticles();
+
+
+    createPaintBlobs();
+
+
+    startIntro();
+}
+
+
+/* =========================================================
+   IMAGE LOADING
+========================================================= */
+
+let sketchLoaded =
+    false;
+
+
+let colorLoaded =
+    false;
+
+
+function checkLoaded() {
+
+    if (
+        sketchLoaded &&
+        colorLoaded
+    ) {
+
+        initialize();
+    }
+}
+
+
+sketchImage.onload =
+
+    function() {
+
+        sketchLoaded =
+            true;
+
+
+        checkLoaded();
+    };
+
+
+colorImage.onload =
+
+    function() {
+
+        colorLoaded =
+            true;
+
+
+        checkLoaded();
+    };
+
+
+/* =========================================================
+   CACHED IMAGE CHECK
+========================================================= */
+
+if (
+    sketchImage.complete
+) {
+
+    sketchLoaded =
+        true;
+}
+
+
+if (
+    colorImage.complete
+) {
+
+    colorLoaded =
+        true;
+}
+
+
+checkLoaded();
+
+
+/* =========================================================
+   REPLAY
+========================================================= */
+
+replay.addEventListener(
+
+    "click",
+
+    function() {
+
+        startIntro();
+    }
+);
+
+
+/* =========================================================
+   MOUSE PARALLAX VALUES
+========================================================= */
+
+let mouseX = 0;
+
+let mouseY = 0;
+
+
+window.addEventListener(
+
+    "mousemove",
+
+    function(event) {
+
+        mouseX =
+
+            (
+                event.clientX /
+                window.innerWidth
+            ) - .5;
+
+
+        mouseY =
+
+            (
+                event.clientY /
+                window.innerHeight
+            ) - .5;
+    }
+);
+
+</script>
+
+</body>
+</html> 

@@ -1,0 +1,117 @@
+{
+  "projects": [
+
+    {
+      "folder": "Visual Posters",
+      "files": ["GURU GOBIND SINGH.png"],
+      "title": "Guru Gobind Singh",
+      "description": ""
+    },
+    {
+      "folder": "Visual Posters",
+      "files": ["HAPPY MAHASHIVRATRI (2).png", "HAPPY MAHASHIVRATRI.png"],
+      "title": "Happy Mahashivratri",
+      "description": "",
+      "featured": true
+    },
+    {
+      "folder": "Visual Posters",
+      "files": ["HUNT Teaser 2.png"],
+      "title": "Hunt Teaser Poster",
+      "description": ""
+    },
+    {
+      "folder": "Visual Posters",
+      "files": ["Scifi.png"],
+      "title": "Sci-Fi",
+      "description": ""
+    },
+    {
+      "folder": "Visual Posters",
+      "files": ["THANK YOU TITLED.jpg", "Thank-You(UNTITLED).jpg"],
+      "title": "Thank You Poster",
+      "description": ""
+    },
+    {
+      "folder": "Visual Posters",
+      "category": "Typography",
+      "files": ["Typography.png"],
+      "title": "Typography Practice",
+      "description": ""
+    },
+
+    {
+      "folder": "Thumbnail Lab",
+      "files": ["HUNT TEASER - Thumbail.png"],
+      "title": "Hunt Teaser Thumbnail",
+      "description": ""
+    },
+    {
+      "folder": "Thumbnail Lab",
+      "files": ["Thank You Orginal Thumnail.png"],
+      "title": "Thank You Thumbnail",
+      "description": ""
+    },
+
+    {
+      "folder": "Motion & Film",
+      "files": ["Birds Day.mp4"],
+      "title": "Birds Day",
+      "description": ""
+    },
+    {
+      "folder": "Motion & Film",
+      "files": ["Dussehra.mp4"],
+      "title": "Dussehra",
+      "description": ""
+    },
+    {
+      "folder": "Motion & Film",
+      "files": ["Electric bike Ad.mp4"],
+      "title": "Electric Bike Ad",
+      "description": ""
+    },
+    {
+      "folder": "Motion & Film",
+      "cover": "../Thumbnail Lab/HUNT TEASER - Thumbail.png",
+      "files": ["Hunt teaser.mp4"],
+      "title": "Hunt Teaser",
+      "description": "",
+      "featured": true
+    },
+    {
+      "folder": "Motion & Film",
+      "files": ["Hunt_ The Pawn _ Trevor Phillips Glimpse.mp4"],
+      "title": "Hunt: The Pawn - Trevor Phillips Glimpse",
+      "description": ""
+    },
+    {
+      "folder": "Motion & Film",
+      "cover": "../Thumbnail Lab/Thank You Orginal Thumnail.png",
+      "files": ["THANK YOU.mp4"],
+      "title": "Thank You",
+      "description": "",
+      "published": false
+    },
+
+    {
+      "folder": "3D Models",
+      "files": ["house.glb"],
+      "title": "House",
+      "description": ""
+    },
+    {
+      "folder": "3D Models",
+      "files": ["Skate.glb", "SKATE 1.glb", "SKATE 2.glb", "SKATE 3.glb"],
+      "title": "Skate",
+      "description": ""
+    },
+    {
+      "folder": "3D Models",
+      "files": ["SPIDEY.glb"],
+      "title": "Spidey",
+      "description": ""
+    }
+
+  ]
+}
