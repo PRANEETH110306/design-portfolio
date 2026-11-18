@@ -4146,11 +4146,17 @@ body.modal-open{overflow:hidden}
 
             display: flex;
 
+            flex-direction: column;
+
             align-items: center;
 
             justify-content: center;
 
-            overflow: hidden;
+            gap: 12px;
+
+            overflow-y: auto;
+
+            overflow-x: hidden;
         }
 
 
@@ -11687,7 +11693,7 @@ body.modal-open{overflow:hidden}
                             </div>
 
                             <div class="detail-value">
-                                India / Available Worldwide
+                                Bengaluru, India · Open to opportunities across India
                             </div>
 
                         </div>
@@ -12063,6 +12069,13 @@ body.modal-open{overflow:hidden}
 ========================================== --></template>
 
 <script>
+/*
+  DATA SOURCES
+  1) Work projects are loaded from ./data/projects.json
+  2) Movie and Gaming social thumbnails continue to use the Google Apps Script feed.
+     The Google Sheet ID is configured inside the Apps Script project, not in this HTML file.
+*/
+const PROJECTS_JSON_URL = "./data/projects.json";
 const FEED_URL = "https://script.google.com/macros/s/AKfycbwc-gFrfRKnd77q38GRKrny4Y9YH4HIkSBnspH4gQECncfm00xY87WjAvudbBK_4FU/exec";
 const INITS = {};
 
@@ -12635,13 +12648,33 @@ INITS.work = function (root, host) {
                 );
 
 
-            if (card.dataset.driveId && card.dataset.kind === "video") {
-  const f = document.createElement("iframe");
-  f.src = "https://drive.google.com/file/d/" + card.dataset.driveId + "/preview";
-  f.allow = "autoplay; fullscreen"; f.allowFullscreen = true;
-  f.style.cssText = "width:100%;height:100%;min-height:600px;border:0";
-  detailMedia.appendChild(f);
-} else if (image) {
+            if (card.dataset.videoEmbed) {
+                const frame = document.createElement("iframe");
+                frame.src = card.dataset.videoEmbed;
+                frame.title = card.dataset.title + " video";
+                frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                frame.allowFullscreen = true;
+                frame.style.cssText = "width:100%;min-height:600px;aspect-ratio:16/9;border:0;";
+                detailMedia.appendChild(frame);
+            } else if (card.dataset.driveId && card.dataset.kind === "video") {
+                const f = document.createElement("iframe");
+                f.src = "https://drive.google.com/file/d/" + card.dataset.driveId + "/preview";
+                f.allow = "autoplay; fullscreen";
+                f.allowFullscreen = true;
+                f.style.cssText = "width:100%;height:100%;min-height:600px;border:0";
+                detailMedia.appendChild(f);
+            } else if (card.dataset.gallery) {
+                let gallery = [];
+                try { gallery = JSON.parse(card.dataset.gallery); } catch (_) {}
+                gallery.forEach((src, index) => {
+                    const galleryImage = document.createElement("img");
+                    galleryImage.src = src;
+                    galleryImage.alt = card.dataset.title + " image " + (index + 1);
+                    galleryImage.loading = "lazy";
+                    galleryImage.style.cssText = "width:100%;max-height:600px;object-fit:contain;flex:0 0 auto;";
+                    detailMedia.appendChild(galleryImage);
+                });
+            } else if (image) {
 
 
                 const clone =
@@ -13228,37 +13261,120 @@ INITS.work = function (root, host) {
 
 
     
-/* ---- Showcase from Google Sheet (Drive files, grouped by category) ---- */
-(function () {
-  const CATS = [
-    { key: "posters",    match: /poster/i,        cls: "poster-card",    label: "POSTER",    cat: "Visual Posters" },
-    { key: "thumbnails", match: /thumb/i,         cls: "thumbnail-card", label: "THUMBNAIL", cat: "Thumbnail Lab" },
-    { key: "videos",     match: /video|film|motion/i, cls: "video-card", label: "FILM",      cat: "Motion & Film" },
-    { key: "models",     match: /model|3d/i,      cls: "model-card",     label: "3D",        cat: "3D Models" }
+/* ---- Work showcase from local JSON: data/projects.json ---- */
+(async function loadWorkProjects() {
+  const categories = [
+    { key: "posters", cls: "poster-card", label: "POSTER", category: "Visual Posters" },
+    { key: "thumbnails", cls: "thumbnail-card", label: "THUMBNAIL", category: "Thumbnail Lab" },
+    { key: "videos", cls: "video-card", label: "FILM", category: "Motion & Film" },
+    { key: "models", cls: "model-card", label: "3D", category: "3D Models" }
   ];
-  const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-  fetch(FEED_URL + "?type=showcase").then(r => r.json()).then(items => {
-    CATS.forEach(c => {
-      const mine = items.filter(i => c.match.test(i.category || ""));
-      const track = root.querySelector(".category." + c.key + " .work-track");
-      if (!mine.length || !track) return;
+
+  const escapeText = value => String(value ?? "");
+
+  try {
+    const response = await fetch(PROJECTS_JSON_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error("Could not load data/projects.json (" + response.status + ")");
+
+    const payload = await response.json();
+    const projects = Array.isArray(payload) ? payload : (payload.projects || []);
+
+    categories.forEach(category => {
+      const track = root.querySelector(".category." + category.key + " .work-track");
+      if (!track) return;
+
+      // JSON is the source of truth; remove the old hard-coded demo cards.
       track.replaceChildren();
-      mine.forEach((it, n) => {
+
+      const categoryProjects = projects.filter(project =>
+        String(project.category || "").trim().toLowerCase() === category.category.toLowerCase()
+      );
+
+      if (!categoryProjects.length) {
+        const empty = document.createElement("p");
+        empty.className = "json-empty-state";
+        empty.textContent = "Projects will appear here when added to data/projects.json.";
+        empty.style.cssText = "color:rgba(255,255,255,.45);font:12px 'Space Grotesk',sans-serif;min-width:260px;padding:24px;";
+        track.appendChild(empty);
+        return;
+      }
+
+      categoryProjects.forEach((project, index) => {
+        const images = Array.isArray(project.images) ? project.images.filter(Boolean) : [];
+        const thumbnail = project.thumbnail || images[0] || project.image || "";
+
         const card = document.createElement("article");
-        card.className = "work-card " + c.cls + " reveal";
-        const title = (it.title || c.label + " " + (n + 1)).toUpperCase();
-        Object.assign(card.dataset, { category: c.cat, title: title, description: it.kind === "video" ? "Click play to watch." : "", year: "", tools: "", type: it.kind === "video" ? "Video" : "Image", driveId: it.id, kind: it.kind });
-        card.innerHTML =
-          '<div class="card-media"><img src="https://drive.google.com/thumbnail?id=' + encodeURIComponent(it.id) + '&sz=w1200" alt="' + esc(title) + '" loading="lazy" referrerpolicy="no-referrer"></div>' +
-          '<div class="card-overlay"><div class="card-number">' + c.label + ' / ' + String(n + 1).padStart(3, "0") + '</div>' +
-          '<div class="card-title">' + esc(title) + '</div><div class="card-type">' + (it.kind === "video" ? "PLAY VIDEO" : "VIEW") + '</div>' +
-          '<button class="view-details" type="button">VIEW DETAILS</button></div>';
-        card.querySelector(".view-details").addEventListener("click", e => { e.stopPropagation(); openDetails(card); });
+        card.className = "work-card " + category.cls + " reveal";
+
+        Object.assign(card.dataset, {
+          category: category.category,
+          title: escapeText(project.title || category.label + " " + (index + 1)),
+          description: escapeText(project.description),
+          year: escapeText(project.year),
+          tools: escapeText(project.tools),
+          type: escapeText(project.type || (category.key === "videos" ? "Video" : "Image")),
+          videoEmbed: escapeText(project.videoEmbed || ""),
+          gallery: JSON.stringify(images.length ? images : (project.image ? [project.image] : (thumbnail ? [thumbnail] : [])))
+        });
+
+        const media = document.createElement("div");
+        media.className = "card-media";
+
+        if (thumbnail) {
+          const img = document.createElement("img");
+          img.src = thumbnail;
+          img.alt = card.dataset.title;
+          img.loading = "lazy";
+          media.appendChild(img);
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "placeholder";
+          placeholder.textContent = "ADD THUMBNAIL";
+          placeholder.style.cssText = "height:100%;min-height:220px;display:grid;place-items:center;color:#777;font-size:11px;letter-spacing:2px;";
+          media.appendChild(placeholder);
+        }
+
+        const overlay = document.createElement("div");
+        overlay.className = "card-overlay";
+
+        const number = document.createElement("div");
+        number.className = "card-number";
+        number.textContent = category.label + " / " + String(index + 1).padStart(3, "0");
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = card.dataset.title.toUpperCase();
+
+        const type = document.createElement("div");
+        type.className = "card-type";
+        type.textContent = project.videoEmbed ? "PLAY VIDEO" : (card.dataset.type || "VIEW").toUpperCase();
+
+        const details = document.createElement("button");
+        details.className = "view-details";
+        details.type = "button";
+        details.textContent = "VIEW DETAILS";
+        details.addEventListener("click", event => {
+          event.stopPropagation();
+          openDetails(card);
+        });
+
+        overlay.append(number, title, type, details);
+        card.append(media, overlay);
         track.appendChild(card);
+
         revealObserver.observe(card);
       });
     });
-  }).catch(() => {});
+  } catch (error) {
+    console.error("Work projects could not be loaded:", error);
+    root.querySelectorAll(".category .work-track").forEach(track => {
+      track.replaceChildren();
+      const message = document.createElement("p");
+      message.textContent = "Unable to load projects. Check that data/projects.json exists and contains valid JSON.";
+      message.style.cssText = "color:#ff8b8b;padding:24px;font:12px 'Space Grotesk',sans-serif;";
+      track.appendChild(message);
+    });
+  }
 })();
 
 };
