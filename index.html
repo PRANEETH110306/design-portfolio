@@ -12076,7 +12076,7 @@ body.modal-open{overflow:hidden}
      The Google Sheet ID is configured inside the Apps Script project, not in this HTML file.
 */
 const PROJECTS_JSON_URL = "./data/projects.json";
-const FEED_URL = "https://script.google.com/macros/s/AKfycbwc-gFrfRKnd77q38GRKrny4Y9YH4HIkSBnspH4gQECncfm00xY87WjAvudbBK_4FU/exec";
+const FEED_URL = "https://script.google.com/macros/s/AKfycbx0I0_8uS6pY7J5Ca4th9NWLMUvYc4r40mZdLnKlHAcg1igGA5x4pQwY_1pH7yrTto/exec";
 const INITS = {};
 
 INITS.about = function (root, host) {
@@ -13277,7 +13277,8 @@ INITS.work = function (root, host) {
     if (!response.ok) throw new Error("Could not load data/projects.json (" + response.status + ")");
 
     const payload = await response.json();
-    const projects = Array.isArray(payload) ? payload : (payload.projects || []);
+    const projects = Array.isArray(payload) 
+    ? payload : (payload.projects || []);
 
     categories.forEach(category => {
       const track = root.querySelector(".category." + category.key + " .work-track");
